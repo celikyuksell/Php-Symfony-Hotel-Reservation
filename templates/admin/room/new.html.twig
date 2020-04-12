@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{hotel.title}}{% endblock %}
+
+{% block body %}
+    <h2>{{hotel.title}}</h2>
+    <h4>Create new Room</h4>
+
+    {{ include('admin/room/_form.html.twig') }}
+
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Title</th>
+            <th>Hotelid</th>
+            <th>Description</th>
+            <th>Image</th>
+            <th>Price</th>
+            <th>Status</th>
+            <th>Number</th>
+            <th>actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for room in rooms %}
+            <tr>
+                <td>{{ room.id }}</td>
+                <td>{{ room.title }}</td>
+                <td>{{ room.hotelid }}</td>
+                <td>{{ room.description }}</td>
+                <td><img src="{{ asset('uploads/images/' ~ room.image) }}" height="60"></td>
+                <td>{{ room.price }}</td>
+                <td>{{ room.status }}</td>
+                <td>{{ room.number }}</td>
+                <td>
+
+                    <a href="{{ path('admin_room_edit', {'id': room.id,'hid': hotel.id}) }}" class="btn-success">Edit</a>
+                </td>
+                <td>
+                    <form method="post" action="{{ path('admin_room_delete', {'id': room.id,'hid': hotel.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+                        <input type="hidden" name="_method" value="DELETE">
+                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ room.id) }}">
+                        <button class="btn btn-danger">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="9">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

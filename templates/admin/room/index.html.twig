@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Room index{% endblock %}
+
+{% block body %}
+    <h1>Room index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Hotelid</th>
+                <th>Description</th>
+                <th>Image</th>
+                <th>Price</th>
+                <th>Status</th>
+                <th>Number</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for room in rooms %}
+            <tr>
+                <td>{{ room.id }}</td>
+                <td>{{ room.title }}</td>
+                <td>{{ room.hotelid }}</td>
+                <td>{{ room.description }}</td>
+                <td>{{ room.image }}</td>
+                <td>{{ room.price }}</td>
+                <td>{{ room.status }}</td>
+                <td>{{ room.number }}</td>
+                <td>
+                    <a href="{{ path('admin_room_show', {'id': room.id}) }}">show</a>
+                    <a href="{{ path('admin_room_edit', {'id': room.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="9">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('admin_room_new') }}">Create new</a>
+{% endblock %}

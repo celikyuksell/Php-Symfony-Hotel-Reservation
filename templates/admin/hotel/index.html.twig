@@ -1,0 +1,139 @@
+{% extends 'adminbase.html.twig' %}
+
+{% block title %}Hotel List{% endblock %}
+
+
+{% block body %}
+
+    <SCRIPT language="JavaScript" type="text/javascript">
+        function openWin( windowURL, windowName, windowFeatures ) { window.open( windowURL, windowName, windowFeatures ) ; 	}
+    </SCRIPT>
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <div class="col-md-4">
+                            <a href="{{ path('admin_hotel_new') }}" class="btn btn-block btn-success" >Create New Hotel</a>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="/admin">Home</a></li>
+                            <li class="breadcrumb-item active">Hotel List</li>
+                        </ol>
+                    </div>
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+
+            <!-- Default box -->
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Hotel List</h3>
+
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                            <i class="fas fa-minus"></i></button>
+                        <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip" title="Remove">
+                            <i class="fas fa-times"></i></button>
+                    </div>
+                </div>
+                <div class="card-body">
+
+
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Category</th>
+                            <th>Title</th>
+                            <th>Image</th>
+                            <th>Star</th>
+
+                            <th>City</th>
+                            <th>Phone</th>
+                            <th>Email</th>
+                            <th>User</th>
+
+                            <th>I.Gallery</th>
+                            <th>Rooms</th>
+                            <th>Status</th>
+
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for hotel in hotels %}
+                            <tr>
+                                <td >{{ hotel.id }}</td>
+                                <td >{{ hotel.catname }}</td>
+                                <td nowrap>{{ hotel.title }}</td>
+                                <td>
+                                    <img src="{{ asset('uploads/images/' ~ hotel.image) }}" height="40">  </td>
+                                <td>{{ hotel.star }}</td>
+
+                                <td>{{ hotel.city }}</td>
+                                <td>{{ hotel.phone }}</td>
+                                <td>{{ hotel.email }}</td>
+
+                                <td><a href="{{ path('admin_user_show', {'id': hotel.userid}) }}">
+                                    {{ hotel.name }} {{ hotel.surname }} </td>
+                                </a>
+
+                                <td>
+                                    <a href="javascript:openWin('{{ path('admin_image_new', {'id': hotel.id}) }}','','toolbar=no,location=no,directories=0,status=no,top=50,left=100,menuBar=no,scrollBars=yes,resizable=no,width=900,height=600');">
+                                     <img src="{{ asset('assets/admin/img') }}/gallery.png" height="40" title="İmage Gallery">
+                                    </a>
+                                </td>
+
+                                <td>
+                                    <a href="javascript:openWin('{{ path('admin_room_new', {'id': hotel.id}) }}','','toolbar=no,location=no,directories=0,status=no,top=50,left=100,menuBar=no,scrollBars=yes,resizable=no,width=900,height=600');">
+                                        <img src="{{ asset('assets/admin/img') }}/room.jpg" height="40" title="Rooms">
+                                    </a>
+                                </td>
+
+                                <td>{{ hotel.status }}</td>
+
+                                <td>
+                                    <a href="{{ path('admin_hotel_show', {'id': hotel.id}) }}" class="btn btn-block btn-info">Show</a>
+                                </td>
+                                <td>
+                                    <a href="{{ path('admin_hotel_edit', {'id': hotel.id}) }}" class="btn btn-block btn-info">Edit</a>
+                                </td>
+                                <td>
+                                {{ include('admin/hotel/_delete_form.html.twig') }}
+                                </td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td colspan="17">no records found</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+
+
+                </div>
+
+
+                <!-- /.card-body -->
+                <div class="card-footer">
+                    Footer
+                </div>
+                <!-- /.card-footer-->
+            </div>
+            <!-- /.card -->
+
+        </section>
+        <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+
+{% endblock %}
+

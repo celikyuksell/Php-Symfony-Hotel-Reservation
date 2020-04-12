@@ -1,0 +1,112 @@
+{% extends 'homebase.html.twig' %}
+
+{% block title %}{{ app.user.name  }} Profile{% endblock %}
+
+{% block body %}
+    <SCRIPT language="JavaScript" type="text/javascript">
+        function openWin( windowURL, windowName, windowFeatures ) { window.open( windowURL, windowName, windowFeatures ) ; 	}
+    </SCRIPT>
+    <!-- Subintro
+================================================== -->
+    <section id="subintro">
+        <div class="container">
+            <div class="row">
+                <div class="span8">
+                    <ul class="breadcrumb">
+                        <li><a href="#"><i class="icon-home"></i></a><i class="icon-angle-right"></i></li>
+                        <li><a href="/user">User</a><i class="icon-angle-right"></i></li>
+                        <li class="active">User Hotel List</li>
+                    </ul>
+                </div>
+                <div class="span4">
+                    <div class="search">
+                        <form class="input-append">
+                            <input class="search-form" id="appendedPrependedInput" type="text" placeholder="Search here.." />
+                            <button class="btn btn-dark" type="submit">Search</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="maincontent">
+        <div class="container">
+            <div class="row">
+
+                {{ include('user/usermenu.html.twig') }}
+
+                <div class="span8">
+                    <!-- start article 1 -->
+                    <article class="blog-post">
+                        <div class="post-heading">
+                            <h3><a href="#">User Hotel List</a></h3>
+                            <a href="{{ path('user_hotel_new') }}" class="btn btn-block btn-success" >Add New Hotel</a>
+                        </div>
+                        <div class="row">
+                            <div class="span8">
+
+                                <table class="table">
+                                    <thead>
+                                    <tr>
+                                        <th>Id</th>
+                                        <th>Title</th>
+                                        <th>Image</th>
+                                        <th>Star</th>
+
+                                        <th>City</th>
+                                        <th>Country</th>
+
+                                        <th>I.Gallery</th>
+                                        <th>Status</th>
+
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for hotel in hotels %}
+                                        <tr>
+                                            <td >{{ hotel.id }}</td>
+                                            <td nowrap>{{ hotel.title }}</td>
+                                            <td>
+                                                <img src="{{ asset('uploads/images/' ~ hotel.image) }}" style="height: 30px">  </td>
+                                            <td>{{ hotel.star }}</td>
+
+                                            <td>{{ hotel.city }}</td>
+                                             <td>{{ hotel.country }}</td>
+
+                                            <td>
+                                                <a href="javascript:openWin('{{ path('user_image_new', {'id': hotel.id}) }}','','toolbar=no,location=no,directories=0,status=no,top=50,left=100,menuBar=no,scrollBars=yes,resizable=no,width=900,height=600');">
+                                                    <img src="{{ asset('assets/admin/img') }}/gallery.png" style="height: 30px">
+                                                </a>
+                                            </td>
+
+                                            <td>{{ hotel.status }}</td>
+
+                                            <td>
+                                                <a href="{{ path('user_hotel_show', {'id': hotel.id}) }}" class="btn btn-theme">Show</a>
+                                            </td>
+                                            <td>
+                                                <a href="{{ path('user_hotel_edit', {'id': hotel.id}) }}" class="btn btn-success">Edit</a>
+                                            </td>
+                                            <td>
+                                                {{ include('hotel/_delete_form.html.twig') }}
+                                            </td>
+                                        </tr>
+                                    {% else %}
+                                        <tr>
+                                            <td colspan="17">no records found</td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+
+                            </div>
+                        </div>
+                    </article>
+                    <!-- end article 1 -->
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>AdminLTE 3 | Log in</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% include('admin/head.html.twig') %}
+
+</head>
+<body class="hold-transition register-page">
+<div class="register-box col-md-6">
+    <div class="register-logo">
+        <a href="../../index2.html"><b>Admin</b>LTE</a>
+    </div>
+
+    <div class="card">
+        <div class="card-body register-card-body">
+            <p class="login-box-msg">Register a new membership</p>
+
+            {{ form_start(registrationForm) }}
+
+
+            {{ form_widget(registrationForm) }}
+            <div class="col-md-2">
+                <button class="btn btn-block btn-primary">{{ button_label|default('Save') }}</button>
+            </div>
+            {{ form_end(registrationForm) }}
+
+        </div>
+        <!-- /.login-card-body -->
+    </div>
+</div>
+<!-- /.login-box -->
+
+
+
+<!-- jQuery -->
+<script src="{{ asset('assets') }}/admin/plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="{{ asset('assets') }}/admin/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- AdminLTE App -->
+<script src="{{ asset('assets') }}/admin/dist/js/adminlte.min.js"></script>
+
+
+
+</body>
+</html>

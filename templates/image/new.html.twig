@@ -1,0 +1,89 @@
+
+
+<!-- Font Awesome -->
+<link rel="stylesheet" href="{{ asset('assets') }}/admin/plugins/fontawesome-free/css/all.min.css">
+<!-- Ionicons -->
+<link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+<!-- overlayScrollbars -->
+<link rel="stylesheet" href="{{ asset('assets') }}/admin/dist/css/adminlte.min.css">
+<!-- Google Font: Source Sans Pro -->
+<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+    <div class="card card-primary">
+
+        <!-- /.card-header -->
+        <!-- form start -->
+        <form role="form" name="image" action="{{ path('user_image_new', {'id': id}) }}" method="post" enctype="multipart/form-data">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-2">
+                        <label for="exampleInputEmail1">Title</label>
+                    </div>
+                    <div class="col-md-6">
+                        <input class="form-control"  type="text" id="image_title" name="image[title]" maxlength="50">
+                        <input type="hidden" id="image_hotel" name="image[hotel]" class="form-control" value="{{ id }}">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-2">
+                    <label for="exampleInputFile">Gallery İmage</label>
+                    </div>
+                    <div class="col-md-6">
+                    <div class="input-group">
+                        <div class="custom-file">
+                            <input  class="custom-file-input" type="file" id="image_image" name="image[image]" >
+                            <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+
+                        </div>
+
+                    </div>
+                    </div>
+                </div>
+
+            </div>
+            <!-- /.card-body -->
+
+            <div class="card-footer">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </form>
+    </div>
+
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Title</th>
+            <th>Image</th>
+            <th>actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for image in images %}
+            <tr>
+                <td>{{ image.id }}</td>
+                <td>{{ image.title }}</td>
+                <td><img src="{{ asset('uploads/images/' ~ image.image) }}" height="60">
+                </td>
+                <td>
+
+                    <form method="post" action="{{ path('user_image_delete', {'id': image.id,'hid': id})}}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+                        <input type="hidden" name="_method" value="DELETE">
+                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ image.id) }}">
+                        <button class="btn btn-block btn-danger">Delete</button>
+                    </form>
+
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+
+

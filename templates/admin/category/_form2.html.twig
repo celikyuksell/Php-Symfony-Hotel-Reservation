@@ -1,0 +1,58 @@
+
+<div class="card card-primary">
+    <div class="card-header">
+        <h3 class="card-title">Create Category</h3>
+    </div>
+
+
+
+
+    <!-- /.card-header -->
+    <!-- form start -->
+    <form name="category" method="post">
+        <div class="card-body">
+            <div class="form-group">
+                <label for="exampleInputEmail1">Parent </label>
+                <select id="category_parentid" name="category[parentid]"   class="form-control">
+
+
+                    <option value="0"> Main Category </option>
+
+                    {% for cat in categories %}
+                        <option value="{{cat.id  }}" {{ cat.id==category.parentid ? ' Selected': '' }}> {{ cat.title }}</option>
+                    {% endfor %}
+
+                </select>
+
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword1">Kategory Name </label>
+                <input type="text" id="category_title" name="category[title]" value="{{ category.title }}" required="required" class="form-control"/>
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword1">Description </label>
+                <input type="text" id="category_description" name="category[description]"  value="{{ category.description }}"   class="form-control"/>
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword1">Kategory Keywords </label>
+                <input type="text" id="category_keywords" name="category[keywords]"   value="{{ category.keywords }}"   class="form-control"/>
+            </div>
+
+            <div class="form-group">
+                <label for="exampleInputPassword1">Status </label>
+                <select id="category_status" name="category[status]"  class="form-control">
+                    <option> {{ category.status }} </option>
+                    <option> True </option>
+                    <option> False </option>
+                </select>
+            </div>
+
+        </div>
+        <!-- /.card-body -->
+
+        <div class="card-footer">
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </form>
+</div>
+

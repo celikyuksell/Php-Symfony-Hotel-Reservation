@@ -1,0 +1,52 @@
+{% extends 'homebase.html.twig' %}
+
+{% block title %}About Us|{{setting[0].title}}{% endblock %}
+{% block keywords %}{{setting[0].keywords}}{% endblock %}
+{% block description %}{{setting[0].description}} {% endblock %}
+
+{% block body %}
+
+    <!-- Subintro
+================================================== -->
+    <section id="subintro">
+        <div class="container">
+            <div class="row">
+                <div class="span8">
+                    <ul class="breadcrumb">
+                        <li><a href="#"><i class="icon-home"></i></a><i class="icon-angle-right"></i></li>
+                        <li><a href="/">Home</a><i class="icon-angle-right"></i></li>
+                        <li class="active">About us</li>
+                    </ul>
+                </div>
+                <div class="span4">
+                    <div class="search">
+                        <form class="input-append">
+                            <input class="search-form" id="appendedPrependedInput" type="text" placeholder="Search here.." />
+                            <button class="btn btn-dark" type="submit">Search</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="maincontent">
+        <div class="container">
+            <div class="row">
+                <div class="span12">
+                    <h2>About Us</h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="span10">
+
+                    {{ setting[0].aboutus |raw }}
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+{% endblock %}
+
+

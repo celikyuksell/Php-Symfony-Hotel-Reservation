@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Room{% endblock %}
+
+{% block body %}
+    <h1>Room</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ room.id }}</td>
+            </tr>
+            <tr>
+                <th>Title</th>
+                <td>{{ room.title }}</td>
+            </tr>
+            <tr>
+                <th>Hotelid</th>
+                <td>{{ room.hotelid }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ room.description }}</td>
+            </tr>
+            <tr>
+                <th>Image</th>
+                <td>{{ room.image }}</td>
+            </tr>
+            <tr>
+                <th>Price</th>
+                <td>{{ room.price }}</td>
+            </tr>
+            <tr>
+                <th>Status</th>
+                <td>{{ room.status }}</td>
+            </tr>
+            <tr>
+                <th>Number</th>
+                <td>{{ room.number }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('admin_room_index') }}">back to list</a>
+
+    <a href="{{ path('admin_room_edit', {'id': room.id}) }}">edit</a>
+
+    {{ include('admin/room/_delete_form.html.twig') }}
+{% endblock %}

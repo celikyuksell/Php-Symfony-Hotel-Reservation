@@ -1,0 +1,144 @@
+{% extends 'adminbase.html.twig' %}
+
+{% block title %}Hello AdminController!{% endblock %}
+
+{% block body %}
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1>Contact Form Message Edit</h1>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="/admin">Home</a></li>
+                            <li class="breadcrumb-item active">Edit Message</li>
+                        </ol>
+                    </div>
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+
+            <!-- Default box -->
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Title</h3>
+
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                            <i class="fas fa-minus"></i></button>
+                        <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip" title="Remove">
+                            <i class="fas fa-times"></i></button>
+                    </div>
+                </div>
+                <div class="card-body">
+
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ reservation[0].id }}</td>
+            </tr>
+            <tr>
+                <th>User </th>
+                <td><a href="{{ path('admin_user_show', {'id': reservation[0].userid}) }}">
+                        {{ reservation[0].username }}
+                    </a></td>
+            </tr>
+            <tr>
+                <th>Hotel</th><td>
+                    <a href="{{ path('admin_hotel_show', {'id': reservation[0].hotelid}) }}">
+                        {{ reservation[0].hname }}
+                    </a>
+                </td>
+            </tr>
+            <tr>
+                <th>Room</th><td>{{ reservation[0].rname }}</td>
+            </tr>
+            <tr>
+                <th>Name</th>
+                <td>{{ reservation[0].name }}</td>
+            </tr>
+            <tr>
+                <th>Surname</th>
+                <td>{{ reservation[0].surname }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ reservation[0].email }}</td>
+            </tr>
+            <tr>
+                <th>Phone</th>
+                <td>{{ reservation[0].phone }}</td>
+            </tr>
+            <tr>
+                <th>Checkin</th>
+                <td>{{ reservation[0].checkin ? reservation[0].checkin|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Checkout</th>
+                <td>{{ reservation[0].checkout ? reservation[0].checkout|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Days</th>
+                <td>{{ reservation[0].days }}</td>
+            </tr>
+            <tr>
+                <th>Total</th>
+                <td>{{ reservation[0].total }}</td>
+            </tr>
+            <tr>
+                <th>Ip</th>
+                <td>{{ reservation[0].ip }}</td>
+            </tr>
+            <tr>
+                <th>Message</th>
+                <td>{{ reservation[0].message }}</td>
+            </tr>
+            <tr>
+                <th>Note</th>
+                <td>{{ reservation[0].note }}</td>
+            </tr>
+            <tr>
+                <th>Status</th>
+                <td>{{ reservation[0].status }}</td>
+            </tr>
+            <tr>
+                <th>Created_at</th>
+                <td>{{ reservation[0].created_at ? reservation[0].created_at|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Updated_at</th>
+                <td>{{ reservation[0].updated_at ? reservation[0].updated_at|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+
+
+    <a href="{{ path('admin_reservation_edit', {'id': reservation[0].id}) }}">edit</a>
+
+
+    </div>
+    <!-- /.card-body -->
+    <div class="card-footer">
+        Footer
+    </div>
+    <!-- /.card-footer-->
+    </div>
+    <!-- /.card -->
+
+    </section>
+    <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+
+{% endblock %}

@@ -1,0 +1,104 @@
+{% extends 'homebase.html.twig' %}
+
+{% block title %}{{ app.user.name  }} Profile{% endblock %}
+
+{% block body %}
+    <!-- Subintro
+================================================== -->
+    <section id="subintro">
+        <div class="container">
+            <div class="row">
+                <div class="span8">
+                    <ul class="breadcrumb">
+                        <li><a href="#"><i class="icon-home"></i></a><i class="icon-angle-right"></i></li>
+                        <li><a href="#">Blog</a><i class="icon-angle-right"></i></li>
+                        <li class="active">Blog with left sidebar</li>
+                    </ul>
+                </div>
+                <div class="span4">
+                    <div class="search">
+                        <form class="input-append">
+                            <input class="search-form" id="appendedPrependedInput" type="text" placeholder="Search here.." />
+                            <button class="btn btn-dark" type="submit">Search</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="maincontent">
+        <div class="container">
+            <div class="row">
+
+                {{ include('user/usermenu.html.twig') }}
+
+                <div class="span8">
+                    <!-- start article 1 -->
+                    <article class="blog-post">
+                        <div class="post-heading">
+                            <h3><a href="#">User Reservations List</a></h3>
+                        </div>
+                        <div class="row">
+                            <div class="span8">
+
+
+                                <table class="table">
+                                    <thead>
+                                    <tr>
+                                        <th>Hotel</th>
+                                        <th>Room</th>
+                                        <th>Name</th>
+                                        <th>Surname</th>
+                                        <th>Checkin</th>
+                                        <th>Checkout</th>
+                                        <th>Days</th>
+                                        <th>Total</th>
+                                        <th>Message</th>
+                                        <th>Note</th>
+                                        <th>Status</th>
+                                        <th>Date</th>
+                                        <th>actions</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for reservation in reservations %}
+                                        <tr>
+                                            <td>
+                                                <a href="{{ path("hotel_show",{"id":reservation.hotelid}) }}">
+                                                    {{ reservation.hname }}
+                                                </a>
+                                            </td>
+                                            <td>{{ reservation.rname }}</td>
+                                            <td>{{ reservation.name }}</td>
+                                            <td>{{ reservation.surname }}</td>
+                                            <td>{{ reservation.checkin|date('d-m-Y')}}</td>
+                                            <td>{{ reservation.checkout|date('d-m-Y')}}</td>
+                                            <td>{{ reservation.days }}</td>
+                                            <td>{{ reservation.total }}</td>
+                                            <td>{{ reservation.message }}</td>
+                                            <td>{{ reservation.note }}</td>
+                                            <td>{{ reservation.status }}</td>
+                                            <td>{{ reservation.created_at }}</td>
+                                            <td>
+                                                <a href="{{ path('user_reservation_show', {'id': reservation.id}) }}">show</a>
+                                            </td>
+                                        </tr>
+                                    {% else %}
+                                        <tr>
+                                            <td colspan="19">no records found</td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+
+                            </div>
+                        </div>
+                    </article>
+                    <!-- end article 1 -->
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}

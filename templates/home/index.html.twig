@@ -1,0 +1,100 @@
+{% extends 'homebase.html.twig' %}
+
+{% block title %}{{setting[0].title}}{% endblock %}
+{% block keywords %}{{setting[0].keywords}}{% endblock %}
+{% block description %}{{setting[0].description}} {% endblock %}
+
+{% block slider %} {% include('home/slider.html.twig') %} {% endblock %}
+{% block body %}
+    <section id="maincontent">
+        <div class="container">
+
+            <div class="row">
+                <div class="span12">
+                    <div class="call-action">
+
+                        <div class="text">
+                            <h2>You should love this stand out call action</h2>
+                            <p>
+                                Hover this call action box and see the call action button play nice animation to seek attention
+                            </p>
+                        </div>
+                        <div class="cta">
+                            <a class="btn btn-large btn-theme" href="#">
+                                <i class="icon-plane icon-white"></i> Get a quote </a>
+                        </div>
+
+                    </div>
+                    <!-- end tagline -->
+                </div>
+            </div>
+
+            <div class="row">
+                {% for rs in hotels %}
+                <div class="span3 features e_pulse">
+                    <a href="{{ path('hotel_show', {'id': rs.id}) }}">
+                    <img src="{{ asset('uploads/images/' ~ rs.image) }}"  style="height: 150px; width:400px" alt="" />
+                    <div class="box">
+                        <div class="divcenter">
+                            <a href="#"><i class="icon-circled icon-48 icon-magic active icon"></i></a>
+                            <h4>{{rs.title}}</h4>
+                        </div>
+                    </div>
+                    </a>
+                </div>
+                {% endfor %}
+
+
+            </div>
+
+            <div class="row">
+                <div class="span12">
+                    <h4 class="rheading">New Hotels<span></span></h4>
+                    <div class="row">
+                        <div class="span3">
+
+                            <p class="hidden-phone">
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut in lacus rhoncus elit egestas luctus. Nullam at lectus augue.
+                            </p>
+
+                            <a href="#" class="btn btn-theme">Read More</a>
+                        </div>
+
+                        <div class="span9">
+                            <div id="latest-work" class="carousel btleft">
+                                <div class="carousel-wrapper">
+                                    <ul class="da-thumbs">
+
+                                        {% for rs in newhotels %}
+                                        <li>
+
+                                            <img src="{{ asset('uploads/images/' ~ rs.image) }}"  style="height: 150px; width:400px" alt="" />
+                                            <article class="da-animate da-slideFromRight">
+                                                <a class="zoom" data-pretty="prettyPhoto" href="{{ asset('uploads/images/' ~ rs.image) }}">
+                                                    <i class="icon-zoom-in icon-rounded icon-48 active"></i>
+                                                </a>
+                                                <a href="{{ path('hotel_show', {'id': rs.id}) }}">
+                                                    <i class="icon-link icon-rounded icon-48 active"></i>
+                                                </a>
+                                                <div class="hidden-tablet">
+                                                    <p>{{rs.title}}</p>
+                                                </div>
+                                            </article>
+                                        </li>
+                                        {% endfor %}
+
+
+
+                                    </ul>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+{% endblock %}

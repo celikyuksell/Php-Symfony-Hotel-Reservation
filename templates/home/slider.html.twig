@@ -1,0 +1,29 @@
+<section id="intro">
+
+    <div class="container">
+        <div class="row">
+            <div class="span12">
+                <!-- Place somewhere in the <body> of your page -->
+                <div id="mainslider" class="flexslider">
+                    <ul class="slides">
+
+                        {% for rs in slider %}
+                            <li data-thumb="{{ asset('uploads/images/' ~ rs.image) }}" style="height: 400px">
+                                <a href="{{ path('hotel_show', {'id': rs.id}) }}">
+                                    <img src="{{ asset('uploads/images/' ~ rs.image) }}"   style="height: 400px; width:940px "  alt="" />
+                                </a>
+                                <div class="flex-caption primary">
+                                    <h2>{{rs.title}}</h2>
+                                    <p>{{rs.description}}</p>
+                                </div>
+                            </li>
+                        {% endfor %}
+
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>

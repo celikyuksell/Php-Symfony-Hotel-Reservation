@@ -1,0 +1,126 @@
+{% extends 'homebase.html.twig' %}
+
+{% block title %}{{ app.user.name  }} Profile{% endblock %}
+
+{% block body %}
+    <!-- Subintro
+================================================== -->
+    <section id="subintro">
+        <div class="container">
+            <div class="row">
+                <div class="span8">
+                    <ul class="breadcrumb">
+                        <li><a href="#"><i class="icon-home"></i></a><i class="icon-angle-right"></i></li>
+                        <li><a href="#">Reservation</a><i class="icon-angle-right"></i></li>
+                        <li class="active">Blog with left sidebar</li>
+                    </ul>
+                </div>
+                <div class="span4">
+                    <div class="search">
+                        <form class="input-append">
+                            <input class="search-form" id="appendedPrependedInput" type="text" placeholder="Search here.." />
+                            <button class="btn btn-dark" type="submit">Search</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="maincontent">
+        <div class="container">
+            <div class="row">
+
+                {{ include('user/usermenu.html.twig') }}
+
+                <div class="span8">
+                    <!-- start article 1 -->
+                    <article class="blog-post">
+                        <div class="post-heading">
+
+                        </div>
+                        <div class="row">
+                            <div class="span8">
+                                <h3>Reservation Form </h3>
+
+                                <table class="table" >
+                                    <tr>
+                                        <th>Hotel :</th>
+                                        <td>{{hotel.title}} </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Room :</th>
+                                        <td>{{room.title}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Price :</th>
+                                        <td>{{ room.price }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Checkin Date :</th>
+                                        <td>{{ data.checkin |date("m/d/Y")}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Check Out Date :</th>
+                                        <td>{{ data.checkout|date("m/d/Y") }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Nights :</th>
+                                        <td>{{ data.days }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Total Price :</th>
+                                        <td>$ {{ data.total }} </td>
+                                    </tr>
+                                </table>
+
+
+
+                                {{ include('messages.html.twig') }}
+
+
+                                <form name="reservation"  method="post" role="form" >
+                                    <div class="row">
+
+
+                                        <div class="span4 form-group">
+                                            <input type="text" id="reservation_name" name="reservation[name]" class="input-block-level" value="{{ app.user.name }}" placeholder="Your Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
+                                            <div class="validation"></div>
+                                        </div>
+                                        <div class="span4 form-group">
+                                            <input type="text" id="reservation_surname" name="reservation[surname]" class="input-block-level" value="{{ app.user.surname }}"  placeholder="Your Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
+                                            <div class="validation"></div>
+                                        </div>
+
+                                        <div class="span4 form-group">
+                                            <input type="email" class="input-block-level" id="reservation_email" name="reservation[email]" value="{{ app.user.email }}" placeholder="Your Email" data-rule="email" data-msg="Please enter a valid email" />
+                                            <div class="validation"></div>
+                                        </div>
+                                        <div class="span4 form-group">
+                                            <input type="text" class="input-block-level" id="reservation_phone" name="reservation[phone]" maxlength="75" placeholder="Phone Number" data-rule="minlen:4" data-msg="Please enter at least 8 chars of subject" />
+                                            <div class="validation"></div>
+                                        </div>
+                                        <div class="span4 form-group">
+                                            <textarea class="input-block-level" id="reservation_message" name="reservation[message]" maxlength="255" rows="5" data-rule="required" data-msg="Please write something for us" placeholder="Message"></textarea>
+                                            <div class="validation"></div>
+                                            <div class="text-center">
+                                                <input type="hidden" id="checkin" name="checkin" value="{{ data.checkin|date("m/d/Y") }}">
+                                                <input type="hidden" id="days" name="days" value="{{ data.days }}">
+                                                ******* CREDIT CARD INFORMATION**********
+                                                <input type="hidden" name="token" value="{{ csrf_token('form-reservation') }}" />
+                                                <button class="btn btn-theme" type="submit">Send a Resrvation</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+
+                            </div>
+                        </div>
+                    </article>
+                    <!-- end article 1 -->
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}

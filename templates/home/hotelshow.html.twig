@@ -1,0 +1,246 @@
+{% extends 'homebase.html.twig' %}
+
+{% block title %}{{ hotel.title  }} {% endblock %}
+{% block keywords %}{{ hotel.keywords  }} {% endblock %}
+{% block description %}{{ hotel.description  }} {% endblock %}
+
+{% block body %}
+    <SCRIPT language="JavaScript" type="text/javascript">
+        function openWin( windowURL, windowName, windowFeatures ) { window.open( windowURL, windowName, windowFeatures ) ; 	}
+    </SCRIPT>
+    <!-- Subintro
+    ================================================== -->
+    <section id="subintro">
+        <div class="container">
+            <div class="row">
+                <div class="span8">
+                    <ul class="breadcrumb">
+                        <li><a href="#"><i class="icon-home"></i></a><i class="icon-angle-right"></i></li>
+                        <li><a href="#">Hotel Detail </a><i class="icon-angle-right"></i></li>
+                        <li class="active">{{ hotel.title  }}</li>
+                    </ul>
+                </div>
+                <div class="span4">
+                    <div class="search">
+                        <form class="input-append">
+                            <input class="search-form" id="appendedPrependedInput" type="text" placeholder="Search here.." />
+                            <button class="btn btn-dark" type="submit">Search</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="maincontent">
+        <div class="container">
+            <div class="row">
+
+                <div class="span7">
+
+                    <!-- Place somewhere in the <body> of your page -->
+                    <div id="mainslider" class="flexslider">
+                        <ul class="slides">
+
+                            <li data-thumb="{{ asset('uploads/images/' ~ hotel.image) }}" style="height: 300px; width: 500px">
+                                <a class="zoom" data-pretty="prettyPhoto" href="{{ asset('uploads/images/' ~ hotel.image) }}">
+                                    <img src="{{ asset('uploads/images/' ~ hotel.image) }}"    alt="" />
+                                </a>
+                                <div class="flex-caption primary">
+                                    <h4>{{hotel.title}}</h4>
+
+
+                                </div>
+                            </li>
+
+                            {% for rs in images %}
+                                <li data-thumb="{{ asset('uploads/images/' ~ rs.image) }}" style="height: 300px; width: 500px">
+                                    <a class="zoom" data-pretty="prettyPhoto" href="{{ asset('uploads/images/' ~ rs.image) }}">
+                                        <img class="zoom" data-pretty="prettyPhoto" src="{{ asset('uploads/images/' ~ rs.image) }}"    alt="" />
+                                    </a>
+                                    <div class="flex-caption primary">
+                                        <h4>{{rs.title}}</h4>
+
+                                    </div>
+                                </li>
+                            {% endfor %}
+
+
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="span5">
+                    <!-- start article 1 -->
+                    <article class="blog-post">
+                        <div class="post-heading">
+                            <h3><a href="#">{{ hotel.title }}</a></h3>
+                        </div>
+                        <div class="row">
+                            <div class="span8">
+
+
+                                <table class="table">
+                                    <tbody>
+
+
+
+                                    <tr>
+                                        <th>Description</th>
+                                        <td>{{ hotel.description }}</td>
+                                    </tr>
+
+                                    <tr>
+                                        <th>Star</th>
+                                        <td>{{ hotel.star }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Address</th>
+                                        <td>{{ hotel.address }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>City</th>
+                                        <td>{{ hotel.city }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Phone</th>
+                                        <td>{{ hotel.phone }} /{{ hotel.country }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Email</th>
+                                        <td>{{ hotel.email }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Fax</th>
+                                        <td>{{ hotel.fax }}</td>
+                                    </tr>
+
+
+
+                                    </tbody>
+                                </table>
+
+                            </div>
+                        </div>
+                    </article>
+                    <!-- end article 1 -->
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="tabbable tabs-top">
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a href="#one" data-toggle="tab"><i class="icon-briefcase"></i> Rooms &Price</a></li>
+                        <li><a href="#two" data-toggle="tab">Hotel Detail Information</a></li>
+                        <li><a href="#three" data-toggle="tab">Comments</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="one">
+
+                            <table class="table">
+                                <thead>
+                                <tr>
+
+                                    <th>Title</th>
+
+                                    <th>Description</th>
+                                    <th>Image</th>
+                                    <th>Price</th>
+
+
+                                    <th> </th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for room in rooms %}
+                                    <tr>
+
+                                        <td>{{ room.title }}</td>
+
+                                        <td>{{ room.description }}</td>
+                                        <td><img src="{{ asset('uploads/images/' ~ room.image) }}" height="80"></td>
+                                        <td>{{ room.price }}</td>
+                                        <td>
+                                            <form  action="{{ path('user_reservation_new', {'hid': room.hotelid,'rid': room.id}) }}" method="post">
+                                                Days <input type="number" id="days" name="days" value="1" style="width: 30px" >
+                                                Checkin Date :<input type="date" id="checkin" name="checkin"  style="width: 140px" required>
+                                                <input type="submit" value="Reserve Room" class="btn btn-success">
+                                            </form>
+                                        </td>
+                                    </tr>
+                                {% else %}
+                                    <tr>
+                                        <td colspan="9">no room found</td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+
+                        </div>
+                        <div class="tab-pane" id="two">
+                            <p>
+                                {{ hotel.detail |raw  }}
+                            </p>
+                        </div>
+                        <div class="tab-pane" id="three">
+
+                            {% for rs in comments %}
+                                <h5>{{ rs.subject }}  [Rate :{{ rs.rate }}]</h5>
+                                <p>
+                                    {{ rs.comment }}
+                                </p>
+                                <hr>
+                            {% endfor %}
+
+                            {% if app.user %}
+                            <h4>Wirte your comment  </h4>
+                            {{ include('messages.html.twig') }}
+
+                            <form name="comment" action="{{ path('user_new_comment', {'id': hotel.id}) }}" method="post" role="form" class="contactForm">
+                                <div class="row">
+
+                                    <div class="span7 form-group">
+                                        <input type="text" class="input-block-level" id="comment_subject" name="comment[subject]" maxlength="75" placeholder="Subject" data-rule="minlen:4" data-msg="Please enter at least 8 chars of subject" />
+                                        <div class="validation"></div>
+                                    </div>
+
+                                    <div class="span7 form-group">
+                                        <textarea class="input-block-level" id="comment_comment" name="comment[comment]" maxlength="255" rows="5" data-rule="required" data-msg="Please write something for us" placeholder="Comment"></textarea>
+                                        <div class="validation"></div>
+                                    </div>
+                                    <div class="span2 form-group">
+                                        <select id="comment_rate" name="comment[rate]" class="input-block-level">
+                                            <option>1</option>
+                                            <option>2</option>
+                                            <option>3</option>
+                                            <option>4</option>s
+                                            <option>5</option>
+                                        </select>
+                                        <div class="validation"></div>
+                                        <input type="hidden" name="token" value="{{ csrf_token('comment') }}" />
+                                        <button class="btn btn-theme" type="submit">Send Comment</button>
+                                    </div>
+
+
+                                </div>
+
+                            </form>
+                            {% else %}
+                                <li>
+                                    <a href="/loginuser"><i class="icon-envelope-alt"></i> If you want to add comment please login</a>
+                                </li>
+                            {% endif %}
+
+
+                        </div>
+                    </div>
+                </div>
+                <!-- end tab -->
+            </div>
+
+        </div>
+    </section>
+
+{% endblock %}
+
+
